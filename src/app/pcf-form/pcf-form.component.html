@@ -1,0 +1,151 @@
+
+
+
+
+<div class="container top15">
+
+
+  <div class="row">
+    <div class="col-md-9 .offset-md-3">
+      <div class="form-group">
+        <label class="form-control-label" for="groupPassword">Enter group password:</label>
+        <input type="text" #groupPassword class="form-control form-control-success" id="groupPassword">
+        <small class="form-text text-muted">Enter obfuscated value of the group password above.</small>
+      </div>
+      <button  (click)="onClick(groupPassword.value)" class="btn btn-success btn-s"> Deobfuscate password </button>
+
+    </div>
+  </div>
+
+  <div class="row top10">
+    <div class="col-md-9 .offset-md-3">
+      <h3 class="text-center"> or </h3>
+    </div>
+  </div>
+
+
+  <div class="row top10">
+    <div class="col-md-9 .offset-md-3">
+      <div ng2FileDrop
+           [ngClass]="{'card-warning': hasBaseDropZoneOver}"
+           (fileOver)="fileOverBase($event)"
+           ng2FileSelect
+           [uploader]="uploader"
+        class="card card-inverse card-primary mb-3 text-center">
+        <div class="card-block">
+          <blockquote class="card-blockquote">
+            <p>Drop you PCF file here...</p>
+          </blockquote>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <div class="row">
+
+    <div class="col-md-9" style="margin-bottom: 40px">
+
+
+      <table class="table" *ngIf="uploader?.queue?.length > 0" >
+        <thead>
+        <tr>
+          <th width="50%">File Name</th>
+          <th>Size</th>
+          <th>Progress</th>
+          <th></th>
+
+        </tr>
+        </thead>
+        <tbody *ngFor="let item of uploader.queue">
+        <tr>
+
+          <td><strong>{{ item?.file?.name }}</strong></td>
+          <td  nowrap>{{ item?.file?.size  }} bytes</td>
+          <td>
+            <div class="progress" style="margin-bottom: 0;">
+              <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
+            </div>
+          </td>
+          <td class="text-center">
+            <span *ngIf="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+            <span *ngIf="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+            <span *ngIf="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+          </td>
+
+        </tr>
+
+        <tr>
+          <td nowrap colspan="4">
+            <button type="button" class="btn btn-success btn-xs"
+                    (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
+              <span class="glyphicon glyphicon-upload"></span> Deobfuscate file
+            </button>
+
+            <button type="button" class="btn btn-danger btn-xs"
+                    (click)="item.remove()">
+              <span class="glyphicon glyphicon-trash"></span> Remove
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+      <!--
+      <div>
+        <div>
+          Queue progress:
+          <div class="progress" style="">
+            <div *ngIf="uploader.isUploading" class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+          </div>
+        </div>
+        <button type="button" class="btn btn-success btn-s"
+                (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+          <span class="glyphicon glyphicon-upload"></span> Upload all
+        </button>
+        <button type="button" class="btn btn-warning btn-s"
+                (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading">
+          <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
+        </button>
+        <button type="button" class="btn btn-danger btn-s"
+                (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
+          <span class="glyphicon glyphicon-trash"></span> Remove all
+        </button>
+      </div>
+-->
+
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-md-9" style="margin-bottom: 40px">
+
+      <ngb-alert *ngIf="message.show" [type]="this.message.type"  (close) = "closeAlert()"> {{message.message}}</ngb-alert>
+
+      <figure *ngIf="vpcFormat" class="highlight">
+           <pre>
+             {{vpcFormat}}
+            </pre>
+      </figure>
+
+      <figure *ngIf="this.decodedPassword">
+        <div class="card">
+
+          <div class="card-block">
+            <h4 class="card-title">Your group password</h4>
+            <pre>
+              {{this.decodedPassword}}
+             </pre>
+
+          </div>
+        </div>
+      </figure>
+
+    </div>
+  </div>
+
+
+</div>
