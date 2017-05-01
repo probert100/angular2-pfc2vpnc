@@ -7,5 +7,5 @@ import {PcfService} from "./pcf.service";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'PCF file deobfuscator';
+  title = 'PCF file decoder';
 }

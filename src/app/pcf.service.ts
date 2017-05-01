@@ -23,7 +23,6 @@ export class PcfService {
     var postBody = {decrypt: password};
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
-
     return this.http.post(this.backEndUrl, postBody)
       .map(this.extractData)
       .catch(this.handleError);
@@ -33,8 +32,6 @@ export class PcfService {
 
   private extractData(res: Response) {
     return res.text();
-   // let body = res.json();
-   // return body.data || { };
   }
 
 
