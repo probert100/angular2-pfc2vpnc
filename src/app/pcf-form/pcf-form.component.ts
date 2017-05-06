@@ -26,7 +26,7 @@ export class PcfFormComponent implements OnInit {
 
   public message = {
     type: <string> 'success',
-    message:<string> 'Success! Your pcf file was deobfuscated.',
+    message:<string> 'Success! Your pcf file was Decryptd.',
     show:<boolean> false
 
   };
@@ -48,7 +48,7 @@ export class PcfFormComponent implements OnInit {
         else{
           this.vpcFormat = response;
         }
-        this.message.message='Success! Your pcf file was deobfuscated.';
+        this.message.message='Success! Your pcf file was Decryptd.';
         this.message.type = 'success';
         this.message.show = true;
         this.uploader.queue[0].remove();

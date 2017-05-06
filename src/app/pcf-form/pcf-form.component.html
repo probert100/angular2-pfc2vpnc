@@ -10,9 +10,9 @@
       <div class="form-group">
         <label class="form-control-label" for="groupPassword">Enter group password:</label>
         <input type="text" #groupPassword class="form-control form-control-success" id="groupPassword">
-        <small class="form-text text-muted">Enter obfuscated value of the group password above.</small>
+        <small class="form-text text-muted">Enter encrypted value of the group password above.</small>
       </div>
-      <button  (click)="onClick(groupPassword.value)" class="btn btn-success btn-s"> Deobfuscate password </button>
+      <button  (click)="onClick(groupPassword.value)" class="btn btn-success btn-s"> Decrypt password </button>
 
     </div>
   </div>
@@ -81,7 +81,7 @@
           <td nowrap colspan="4">
             <button type="button" class="btn btn-success btn-xs"
                     (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
-              <span class="glyphicon glyphicon-upload"></span> Deobfuscate file
+              <span class="glyphicon glyphicon-upload"></span> Decrypt file
             </button>
 
             <button type="button" class="btn btn-danger btn-xs"
